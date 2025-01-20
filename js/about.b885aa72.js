@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkbarbas_vue_ts"]=self["webpackChunkbarbas_vue_ts"]||[]).push([[594],{9147:function(u,a,n){n.r(a),n.d(a,{default:function(){return i}});var s=n(6768);const t={class:"about"};function e(u,a){return(0,s.uX)(),(0,s.CE)("div",t,a[0]||(a[0]=[(0,s.Lk)("h1",null,"This is an about page",-1)]))}var r=n(1241);const c={},b=(0,r.A)(c,[["render",e]]);var i=b}}]);
+//# sourceMappingURL=about.b885aa72.js.map

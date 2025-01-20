@@ -1,0 +1,1 @@
+.form-access{display:flex;justify-content:center;align-items:center;background-color:var(--shadow);height:calc(100vh - 72px)}.form-access form{width:300px;border:solid 1px var(--gray);border-radius:8px;background-color:var(--yellow);padding:20px}.form-access form p{margin-top:10px}
