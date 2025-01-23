@@ -4,6 +4,7 @@
       <div class="form-group">
         <label for="email">E-mail</label>
         <input
+        v-model="email"
           type="email"
           name="email"
           id="email"
@@ -15,6 +16,7 @@
       <div class="form-group">
         <label for="password">Senha</label>
         <input
+        v-model="senha"
           type="password"
           name="password"
           id="password"
@@ -28,7 +30,7 @@
       </div>
 
       <div class="form-group">
-        <button>Entrar</button>
+        <button @click="sendLoginEmail">Entrar</button>
       </div>
 
       <div>
@@ -41,7 +43,18 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { authService } from '@/core/service/auth.service';
+import { ref } from 'vue';
+
+const email = ref("");
+const senha =ref("");
+
+function sendLoginEmail(){
+authService.loginEmail(email.value,
+ senha.value);
+}
+</script>
 
 <style scoped>
 @import "@/assets/css/login.css";
