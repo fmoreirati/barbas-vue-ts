@@ -26,7 +26,7 @@ const services = ref(serviceData)
 /* Servicos */
 .card-container {
   width: 100%;
-  /* height: 100vh; */
+
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
