@@ -1,5 +1,6 @@
 <template>
     <section class="form-access">
+        
         <form action="">
             <div class="form-group">
                 <label for="email">E-mail</label>
@@ -87,13 +88,6 @@ function sendloginGoogle() {
 
 <style scoped>
 @import "@/assets/css/login.css";
+@import "@/assets/css/alert.css";
 
-.alert.alert-danger {
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    width: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
 </style>
