@@ -4,7 +4,7 @@ import { app } from "./firebase";
 import { getAuth, createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 export function addAuth(email: string, password: string) {
     return createUserWithEmailAndPassword(auth, email, password);
