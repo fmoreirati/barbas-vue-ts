@@ -44,7 +44,7 @@
       </div>
     </form>
   </section>
-  <div v-if="errorLogin" class="alert alert-danger" role="alert">
+  <div v-if="errorLogin" class="alert alert-warning" role="alert">
   {{ errorLogin }}
 </div>
 
@@ -78,7 +78,7 @@ authService.loginGoogle()
 
 <style scoped>
 @import "@/assets/css/login.css";
-.alert.alert-danger{
+.alert.alert-warning{
   position: absolute;
   top: 230px;
   left: 50%;

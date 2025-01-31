@@ -1,10 +1,11 @@
-import{ auth, getLoginGoogle, postLoginEmail}from "@/core/infra/auth.repository";
+import{ auth, getLoginGoogle, getLogoff, postLoginEmail}from "@/core/infra/auth.repository";
 import { Person } from "../domain/Person";
 
 export const authService = {
     loginEmail,
     loginGoogle,
-    getAuthUser};
+    getAuthUser,
+    logoff};
 
 async function loginEmail(email:string, password:string) {
    return await postLoginEmail(email, password)
@@ -42,9 +43,14 @@ async function loginEmail(email:string, password:string) {
     function getAuthUser(){
         console.log(auth.currentUser);
         const user = auth.currentUser;
+        if(!user) return;
         return <Person>{
             email: user?.email,
             name: user?.displayName,
             photo: user?.photoURL,
         };
+    }
+    function logoff(){
+        return getLogoff()
+            
     }
