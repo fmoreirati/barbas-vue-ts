@@ -63,6 +63,7 @@ import { ref } from "vue";
 const email = ref("");
 const senha = ref("");
 const errorLogin = ref("");
+const user = authService.getAuthUser();
 
 function sendLoginEmail() {
     authService
