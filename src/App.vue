@@ -10,3 +10,4 @@ import NavBar from "@/components/NavBar.vue"
 <style>
 @import "@/assets/css/main.css";
 </style>
+
