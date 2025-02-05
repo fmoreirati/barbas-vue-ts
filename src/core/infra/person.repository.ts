@@ -7,7 +7,7 @@ import {
     getFirestore,
     collection,
     getDocs,
-    addDoc,
+    getDoc,
     query,
     where,
     doc,
@@ -50,4 +50,18 @@ export async function queryPerson() {
     });
 
     return querySnapshot;
+}
+
+export async function getPerson(idDoc: string) {
+    const docRef = doc(db, "person", idDoc);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+    } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+    }
+
+    return docSnap;
 }

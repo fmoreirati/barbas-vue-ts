@@ -1,4 +1,5 @@
 export class Person {
+    id?: string;
     name: string;
     email: string;
     telephone: string;
@@ -13,6 +14,7 @@ export class Person {
     isActive: boolean;
 
     constructor() {
+        this.id = "";
         this.name = "";
         this.email = "";
         this.password = "";
