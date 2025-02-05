@@ -4,14 +4,15 @@ import { Person } from "../domain/Person";
 import { addAuth, removeAuth } from "./auth.repository";
 import { app } from "./firebase";
 import {
-    getFirestore,
-    collection,
-    getDocs,
     addDoc,
-    query,
-    where,
+    collection,
     doc,
+    getDocs,
+    getDoc,
+    getFirestore,
+    query,
     setDoc,
+    where,
 } from "firebase/firestore/lite";
 
 const db = getFirestore(app);
@@ -50,4 +51,16 @@ export async function queryPerson() {
     });
 
     return querySnapshot;
+}
+ export async function getPerson(idDoc:string){
+    const docRef = doc(db, "person", idDoc);
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+} else {
+  // docSnap.data() will be undefined in this case
+  console.log("No such document!");
+}
+return docSnap;
 }

@@ -1,5 +1,8 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav
+        class="navbar navbar-expand-lg fixed-top"
+        @mousemove="updateDataAuth()"
+    >
         <div class="container">
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <img
@@ -34,23 +37,25 @@
                         <a class="nav-link" href="/#contact">Contato</a>
                     </li>
                 </ul>
+
                 <ul v-if="person" class="navbar-nav">
-                    <li  class="nav-item">
-                        <RouterLink class="nav-link" to="/login"
-                            >{{ person.name ?? person.email }}
+                    <li class="nav-item">
+                        <RouterLink 
+                        class="nav-link"
+                        :to="`/profile/${person?.id}`">
+                            {{ person?.name ?? person?.email }}
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" @click="sendLogoff()"
-                            >Sair
-                    </a>
+                        <a class="nav-link" @click="sendLogoff()"> Sair </a>
                     </li>
                 </ul>
+
                 <ul v-else class="navbar-nav">
                     <li class="nav-item">
-                        <RouterLink class="nav-link" to="/login"
-                            >Entrar
-                            </RouterLink>
+                        <RouterLink class="nav-link" to="/login">
+                            Entrar
+                        </RouterLink>
                     </li>
                 </ul>
             </div>
@@ -59,23 +64,37 @@
 </template>
 
 <script setup lang="ts">
-import{Person}from"@/core/domain/Person"
-import{authService}from "@/core/service/auth.service"
-import router from "@/router"
-import{ref}from "vue"
-    const person = ref<Person>()
-    person.value = authService.getAuthUser()
+import { Person } from "@/core/domain/Person";
+import { authService } from "@/core/service/auth.service";
+import router from "@/router";
+import { ref } from "vue";
 
-function sendLogoff(){
-    authService.logoff()
-    .then(res=>{
-        router.push("/")
-    })
-    .catch(()=>{
-        alert("Não foi possível sair!")
-    }) 
+const person = ref<Person | undefined>();
+
+let times = 0;
+
+function updateDataAuth() {
+    clearTimeout(times);
+    times = setTimeout(() => {
+        person.value = authService.getAuthUser();
+    }, 500);
 }
 
+function sendLogoff() {
+    authService
+        .logoff()
+        .then(() => {
+            updateDataAuth();
+            router.push("/");
+        })
+        .catch(() => {
+            alert("Não foi possível sair!");
+        });
+}
+
+router.beforeEach(() => {
+    updateDataAuth();
+});
 </script>
 
 <style scoped>
