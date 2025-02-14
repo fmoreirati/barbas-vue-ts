@@ -4,15 +4,16 @@ import { Person } from "../domain/Person";
 import { addAuth, removeAuth } from "./auth.repository";
 import { app } from "./firebase";
 import {
-    addDoc,
-    collection,
-    doc,
-    getDocs,
-    getDoc,
     getFirestore,
+    collection,
+    getDocs,
+    addDoc,
     query,
-    setDoc,
     where,
+    doc,
+    setDoc,
+    getDoc,
+    updateDoc
 } from "firebase/firestore/lite";
 
 const db = getFirestore(app);
@@ -47,20 +48,34 @@ export async function queryPerson() {
 
     querySnapshot.forEach(doc => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        console.log(">>> queryPerson: ", doc.id, " => ", doc.data());
     });
 
     return querySnapshot;
 }
- export async function getPerson(idDoc:string){
-    const docRef = doc(db, "person", idDoc);
-const docSnap = await getDoc(docRef);
 
-if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
-} else {
-  // docSnap.data() will be undefined in this case
-  console.log("No such document!");
+export async function getPerson(idDoc: string) {
+    const docRef = doc(db, "person", idDoc);
+    const docSnap = await getDoc(docRef);
+
+    let person: Person | undefined = undefined;
+
+    if (docSnap.exists()) {
+        //console.log("Document data:", docSnap.data());
+        person = { ...docSnap.data(), id: docSnap.id } as Person;
+    }
+
+    //else {
+    // docSnap.data() will be undefined in this case
+    //console.log("No such document!");
+    //}
+
+    console.log(">>> getPerson ", person);
+    return person;
 }
-return docSnap;
+
+export async function editPerson(idDoc:string,person:Person){
+  const docRef = doc(db,"person",idDoc);
+  person.password =''
+  return await updateDoc(docRef,{...person});
 }

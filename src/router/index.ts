@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import PersonAdd from "../views/PersonAddView.vue";
-import PersonProfile from "@/PersonProfileView.vue";
+import HomeView from "@/views/HomeView.vue";
+import PersonAdd from "@/views/PersonAddView.vue";
+import PersonProfile from "@/views/PersonProfileView.vue";
+
 const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
@@ -19,7 +20,12 @@ const routes: Array<RouteRecordRaw> = [
         component: PersonAdd,
     },
     {
-        path: "/profile:id",
+        path: "/person-edit/:id",
+        name: "Editar Usuário",
+        component: PersonAdd,
+    },
+    {
+        path: "/profile/:id",
         name: "Perfil",
         component: PersonProfile,
     },
@@ -34,11 +40,9 @@ const routes: Array<RouteRecordRaw> = [
     },
 ];
 
-
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
 });
-
 
 export default router;

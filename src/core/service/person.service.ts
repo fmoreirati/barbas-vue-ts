@@ -1,9 +1,10 @@
 import { Person } from "../domain/Person";
-import { addPerson, getPerson } from "../infra/person.repository";
+import { addPerson, editPerson, getPerson } from "../infra/person.repository";
 
 export const personService = {
     add,
     get,
+    edit
 };
 
 function add(person: Person) {
@@ -13,7 +14,7 @@ function add(person: Person) {
 
     addPerson(person)
         .then(res => {
-            console.log("Adicionado: ", res);
+            ///console.log(">>> Adicionado: ", res);
             alert("Adicionado com sucesso!");
         })
         .catch(error => {
@@ -22,7 +23,12 @@ function add(person: Person) {
         });
 }
 
-async function get(id:string){
-    if (!id) throw new Error("Dados incompletos")
-    return await getPerson(id)
+async function get(id: string) {
+    if (!id) throw new Error("Dados incompletos");
+    return await getPerson(id);
+}
+
+function edit(person:Person){
+  if(!person.id) throw new Error("Dados inválidos!")
+  return editPerson(person.id,person);
 }
