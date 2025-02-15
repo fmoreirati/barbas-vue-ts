@@ -1,29 +1,31 @@
 <template>
-    <div class="container bg-body h-100">
-        {{ person }}
-        <div>
-            <img :src="person?.photo" alt="" />
-        </div>
-        <div>
-            <p>
-                <b>Nome: </b>
-                <br />{{ person?.name }}
-            </p>
-            <p>
-                <b>Email: </b>
-                <br />{{ person?.email }}
-            </p>
-        </div>
+  <section class="profile-edit">
 
-        <div>
-            <button
-                type="button"
-                @click="$router.push(`/person-edit/${person.id}`)"
-            >
-                Editar
-            </button>
-        </div>
+    <div class="profile-user">
+      <h1>
+        Perfil do usuário
+      </h1>
+      <div>
+        <img :src="person?.photo" alt="" />
+      </div>
+      <div class="profile-text">
+        <p>
+          <b>Nome: </b>
+          <br />{{ person?.name }}
+        </p>
+        <p>
+          <b>Email: </b>
+          <br />{{ person?.email }}
+        </p>
+      </div>
+
+      <div>
+        <button class="btn" type="button" @click="$router.push(`/person-edit/${person.id}`)">
+          Editar
+        </button>
+      </div>
     </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -47,4 +49,6 @@ function openFormEdit() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@import "@/assets/css/profile.css";
+</style>

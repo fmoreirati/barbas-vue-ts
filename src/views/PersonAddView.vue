@@ -7,7 +7,7 @@
             @submit.prevent="add()"
         >
             <h1 class="text-center">Faça seu cadastro</h1>
-            {{ person }}
+
 
             <InputValue
                 v-model="person.name"
